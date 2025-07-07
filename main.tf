@@ -23,3 +23,11 @@ resource "azurerm_resource_group" "Dipayan-rg"{
     name="Dipayan-rg"
     location= "Central India"
 }
+
+resource "azurerm_storage_account" "SG1" {
+  name                     = "storageaccountname"
+  resource_group_name      = "Ratnesh-rg"
+  location                 = "Central India"
+  account_tier             = "Standard"
+  account_replication_type = "GRS"
+}
