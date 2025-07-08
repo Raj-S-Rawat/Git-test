@@ -30,3 +30,10 @@ resource "azurerm_storage_account" "SG1" {
   account_tier             = "Standard"
   account_replication_type = "GRS"
 }
+resource "azurerm_storage_account" "SG2" {
+  name                     = "storageaccountname"
+  resource_group_name      = "Dipayan-rg"
+  location                 = "Central India"
+  account_tier             = "Standard"
+  account_replication_type = "GRS"
+}
