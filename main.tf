@@ -37,3 +37,7 @@ resource "azurerm_storage_account" "SG2" {
   account_tier             = "Standard"
   account_replication_type = "GRS"
 }
+resource "azurerm_resource_group" "D-rg"{
+    name="D-rg"
+    location= "Central India"
+}
