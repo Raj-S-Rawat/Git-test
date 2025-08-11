@@ -6,8 +6,9 @@ trigger:
 
 pool: Insiders
 
+steps:
 - task: TerraformTask@5
-  displayname: init
+  displayName: init
   inputs:
     provider: 'azurerm'
     command: 'init'
@@ -18,7 +19,7 @@ pool: Insiders
     backendAzureRmKey: 'rajtf.tfstate'
 
 - task: TerraformTask@5
-  displayname: plan
+  displayName: plan
   inputs:
     provider: 'azurerm'
     command: 'plan'
@@ -26,7 +27,7 @@ pool: Insiders
     environmentServiceNameAzureRM: 'Service_Raj'
 
 - task: TerraformTask@5
-  displayname: apply
+  displayName: apply
   inputs:
     provider: 'azurerm'
     command: 'apply'
