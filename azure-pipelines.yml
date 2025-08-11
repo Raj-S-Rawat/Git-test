@@ -4,8 +4,7 @@ trigger:
      - feature/*
      - main
 
-pool:
-  Insiders
+pool: Insiders
 
 - task: TerraformTask@5
   displayname: init
