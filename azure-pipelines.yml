@@ -1,0 +1,32 @@
+trigger:
+  branches:
+    include:
+     - feature/*
+     - main
+
+pool:
+  Insiders
+
+- task: TerraformTask@5
+  inputs:
+    provider: 'azurerm'
+    command: 'init'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/'
+    backendServiceArm: 'Service_Raj'
+    backendAzureRmStorageAccountName: 'rajstorageacct123'
+    backendAzureRmContainerName: 'rajcontainer'
+    backendAzureRmKey: 'rajtf.tfstate'
+
+- task: TerraformTask@5
+  inputs:
+    provider: 'azurerm'
+    command: 'plan'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/'
+    environmentServiceNameAzureRM: 'Service_Raj'
+
+- task: TerraformTask@5
+  inputs:
+    provider: 'azurerm'
+    command: 'apply'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/'
+    environmentServiceNameAzureRM: 'Service_Raj'
