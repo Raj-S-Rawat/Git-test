@@ -1,0 +1,39 @@
+trigger:
+  branches:
+    include:
+     - feature/*
+     - main
+
+pool: Insiders
+
+steps:
+- task: TerraformTask@5
+  displayName: init
+  inputs:
+    provider: 'azurerm'
+    command: 'init'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/'
+    backendServiceArm: 'Service_Raj'
+    backendAzureRmStorageAccountName: 'rajstorageacct123'
+    backendAzureRmContainerName: 'rajcontainer'
+    backendAzureRmKey: 'rajtf.tfstate'
+
+- task: TerraformTask@5
+  displayName: plan
+  inputs:
+    provider: 'azurerm'
+    command: 'plan'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/'
+    environmentServiceNameAzureRM: 'Service_Raj'
+
+# Apply only allowed on main branch (not in feature/*)
+
+- task: TerraformTask@5
+  displayName: Terraform applywa
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
+  inputs:
+    provider: 'azurerm'
+    command: 'apply'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/'
+    commandOptions: ' -- auto-approve'
+    environmentServiceNameAzureRM: 'Service_Raj'
