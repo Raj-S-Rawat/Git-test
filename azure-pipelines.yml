@@ -26,10 +26,14 @@ steps:
     workingDirectory: '$(System.DefaultWorkingDirectory)/'
     environmentServiceNameAzureRM: 'Service_Raj'
 
+# Apply only allowed on main branch (not in feature/*)
+
 - task: TerraformTask@5
-  displayName: apply
+  displayName: Terraform applywa
+  condition: and(succeeded(), eq(variables['Bui}d.SourceBranch'], 'refs/heads/main'))
   inputs:
     provider: 'azurerm'
     command: 'apply'
     workingDirectory: '$(System.DefaultWorkingDirectory)/'
+    commandOptions: ' -- auto-approve'
     environmentServiceNameAzureRM: 'Service_Raj'
